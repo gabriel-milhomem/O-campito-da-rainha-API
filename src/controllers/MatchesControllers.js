@@ -12,20 +12,27 @@ class MatchesControllers {
         return match;
     }
 
-    async getMatchById(id) {
+    async getMatchById(id, playerColor= null) {
         const match = await Match.findByPk(id, {
             include: Piece,
         });
         if(!match) throw new Errors.NotFoundError();
 
+        if(playerColor && !match.status.includes(playerColor)) {
+            throw new Errors.ForbbidenError();
+        }
+
         return match;
     }
 
-    getMatchBySecretKey(secretKey) {
-        return Match.findOne({ 
+    async getMatchBySecretKey(secretKey) {
+        const match = await Match.findOne({ 
             where: {secretKey},
             include: Piece
         });
+        if(!match) throw new Errors.UnauthorizedError();
+
+        return match;
     }
 }
 

@@ -21,10 +21,14 @@ class PiecesControllers {
         return allPieces;
     }
 
-    async getPieceById(id) {
+    async getPieceById(id, playerColor) {
         const piece = await Piece.findByPk(id);
         if(!piece) throw new Errors.NotFoundError();
 
+        if(piece.color !== playerColor) {
+            throw new Errors.ForbbidenError();
+        }
+        
         return piece;
     }
 }

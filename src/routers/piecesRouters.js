@@ -1,33 +1,33 @@
 const express = require('express');
-const authenticateGame = require('../middlewares/authenticateGame');
+const authenticateMatch = require('../middlewares/authenticateMatch');
+const authenticatePieces = require('../middlewares/authenticatePieces');
 const Errors = require('../errors');
+const Schemas = require('../schemas');
 
 const router = express.Router();
 
-router.get('/:id/moves', authenticateGame, async (req, res) => {
+router.get('/:id/moves', authenticateMatch, authenticatePieces, async (req, res) => {
     try {
-        
+
+        res.sendStatus(200);
     } catch (err) {
         console.error(err);
-        if(err instanceof Erros.NotFoundError) {
-            res.status(404).send({ error: 'id param not found'});
-        } else {
-            res.sendStatus(500);
-        }
+        res.sendStatus(500);
     }
 });
 
 
-router.post('/:id/moves', authenticateGame, async (req, res) => {
+router.post('/:id/moves', authenticateMatch, authenticatePieces, async (req, res) => {
     try {
-
+        const { error } = Schemas.move.validate(req.body);
+        if(error) { 
+            return res.status(422).send({error: error.details[0].message});
+        }
+        
+        res.sendStatus(200);
     } catch (err) {
         console.error(err);
-        if(err instanceof Errors.NotFoundError) {
-            res.status(404).send({ error: 'id param not found'});
-        } else {
-            res.sendStatus(500);
-        }
+        res.sendStatus(500);
     }
 });
 
