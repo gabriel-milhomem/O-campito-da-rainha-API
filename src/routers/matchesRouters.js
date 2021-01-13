@@ -1,6 +1,8 @@
 const express = require('express');
 const MatchesControllers = require('../controllers/MatchesControllers');
 const PiecesControllers = require('../controllers/PiecesControllers');
+const authenticateGame = require('../middlewares/authenticateGame');
+const Errors = require('../errors');
 
 const router = express.Router();
 
@@ -17,12 +19,20 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateGame, async (req, res) => {
     try {
+        const id = Number(req.params.id);
+        const allMatchData = await MatchesControllers.getMatchById(id);
+
+        res.status(200).send(allMatchData);
         
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        if(err instanceof Errors.NotFoundError) {
+            res.status(404).send({ error: 'id param not found'});
+        } else {
+            res.sendStatus(500);
+        }
     }
 });
 

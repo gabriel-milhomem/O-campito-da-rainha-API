@@ -1,4 +1,5 @@
 const Piece = require('../models/Piece');
+const Errors = require('../errors');
 
 class PiecesControllers {
     async createPieces(matchId) {
@@ -16,8 +17,15 @@ class PiecesControllers {
                 }
             }
         }
+        const allPieces = await Piece.bulkCreate(pieces);
+        return allPieces;
+    }
 
-        return await Piece.bulkCreate(pieces);
+    async getPieceById(id) {
+        const piece = await Piece.findByPk(id);
+        if(!piece) throw new Errors.NotFoundError();
+
+        return piece;
     }
 }
 
