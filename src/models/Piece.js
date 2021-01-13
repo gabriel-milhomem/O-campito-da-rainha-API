@@ -1,9 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require('../utils/database');
 
-class Piece extends Sequelize.Model {
-
-}
+class Piece extends Sequelize.Model { }
 
 Piece.init(
 {
@@ -21,7 +19,7 @@ Piece.init(
         type: Sequelize.STRING,
         allowNull: false,
     },
-    rol: {
+    row: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
@@ -30,11 +28,10 @@ Piece.init(
         allowNull: false,
     },
     matchId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
     }
-},   
-    {
+},   {
         sequelize,
         timestamps: false,
         modelName: 'piece'

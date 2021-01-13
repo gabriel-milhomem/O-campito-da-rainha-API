@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('matches', {
+    await queryInterface.createTable('pieces', {
       id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
@@ -17,7 +17,7 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
       },
-      rol: {
+      row: {
           type: Sequelize.INTEGER,
           allowNull: false,
       },
@@ -26,10 +26,10 @@ module.exports = {
           allowNull: false,
       },
       matchId: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'match',
+            model: 'matches',
             key: 'id'
           }
       }

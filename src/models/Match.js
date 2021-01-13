@@ -2,9 +2,7 @@ const { Sequelize } = require("sequelize");
 const sequelize = require('../utils/database');
 const Piece = require('./Piece');
 
-class Match extends Sequelize.Model {
-
-}
+class Match extends Sequelize.Model { }
 
 Match.init(
 {
