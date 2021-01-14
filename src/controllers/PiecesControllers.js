@@ -1,5 +1,6 @@
 const Piece = require('../models/Piece');
 const Errors = require('../errors');
+const Directions = require('../utils/Directions');
 
 class PiecesControllers {
     async createPieces(matchId) {
@@ -20,6 +21,44 @@ class PiecesControllers {
 
         const allPieces = await Piece.bulkCreate(pieces);
         return allPieces;
+    }
+
+    getAllMoves(piece, match) {
+        let moves;
+        switch(piece.type) {
+            case 'rook':
+                moves = this.getRookMoves(piece, match.pieces);
+                break
+            case 'bishop':
+                //moves = this.getBishopMoves(piece, match);
+                break
+            case 'queen':
+                //moves = this.getQueenMoves(piece, match);
+                break
+            case 'knight':
+                //moves = this.getKnightMoves(piece, match);
+                break
+            case 'king':
+                //moves = this.getKingMoves(piece, match);
+                break
+            case 'pawn':
+                //moves = this.getPawnMoves(piece, match);
+                break
+        }
+
+        return moves;
+    }
+
+
+
+    getRookMoves(piece, board) {
+        const possibleMoves = [];
+        const {row: actualRow, col: actualCol} = piece;
+        Directions.north(actualRow - 1, actualCol, possibleMoves, board);
+        Directions.east(actualRow, actualCol + 1, possibleMoves, board);
+        Directions.south(actualRow + 1, actualCol, possibleMoves, board);
+        Directions.west(actualRow, actualCol - 1, possibleMoves, board);
+        return possibleMoves;
     }
 
     async getPieceById(id, playerColor) {
