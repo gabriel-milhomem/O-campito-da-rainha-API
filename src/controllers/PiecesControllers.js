@@ -30,10 +30,10 @@ class PiecesControllers {
                 moves = this.getRookMoves(piece, board);
                 break
             case 'bishop':
-                //moves = this.getBishopMoves(piece, board);
+                moves = this.getBishopMoves(piece, board);
                 break
             case 'queen':
-                //moves = this.getQueenMoves(piece, board);
+                moves = this.getQueenMoves(piece, board);
                 break
             case 'knight':
                 //moves = this.getKnightMoves(piece, board);
@@ -51,11 +51,12 @@ class PiecesControllers {
 
     getBishopMoves(piece, board) {
         const moves = [];
-        const {row: actualRow, col: actualCol} = piece;
-        Directions.northeast(actualRow - 1, actualCol + 1, moves, board);
-        Directions.southeast(actualRow + 1, actualCol + 1, moves, board);
-        Directions.southwest(actualRow + 1, actualCol - 1, moves, board);
-        Directions.northwest(actualRow - 1 , actualCol - 1, moves, board);
+        const {row: actualRow, col: actualCol, color} = piece;
+
+        Directions.northeast(actualRow - 1, actualCol + 1, moves, board, color);
+        Directions.southeast(actualRow + 1, actualCol + 1, moves, board, color);
+        Directions.southwest(actualRow + 1, actualCol - 1, moves, board, color);
+        Directions.northwest(actualRow - 1 , actualCol - 1, moves, board, color);
 
         return moves;
     }
@@ -70,11 +71,13 @@ class PiecesControllers {
 
     getRookMoves(piece, board) {
         const moves = [];
-        const {row: actualRow, col: actualCol} = piece;
-        Directions.north(actualRow - 1, actualCol, moves, board);
-        Directions.east(actualRow, actualCol + 1, moves, board);
-        Directions.south(actualRow + 1, actualCol, moves, board);
-        Directions.west(actualRow, actualCol - 1, moves, board);
+        const {row: actualRow, col: actualCol, color} = piece;
+
+        Directions.north(actualRow - 1, actualCol, moves, board, color);
+        Directions.east(actualRow, actualCol + 1, moves, board, color);
+        Directions.south(actualRow + 1, actualCol, moves, board, color);
+        Directions.west(actualRow, actualCol - 1, moves, board, color);
+
         return moves;
     }
 

@@ -1,11 +1,13 @@
 const PiecesControllers = require('../../src/controllers/PiecesControllers');
 const Piece = require('../../src/models/Piece');
 const allPieces = require('../helpers/piecesObject');
+const Moves = require('../helpers/movesTest');
+const Boards = require('../helpers/boardsTest');
 const Errors = require('../../src/errors');
 
 jest.mock('../../src/models/Piece');
 
-/*describe('function createPieces', () => {
+describe('function createPieces', () => {
     it('should create all the pieces of chess when initial a game', async () => {
         const expected = allPieces;
 
@@ -42,93 +44,100 @@ describe('function getPieceById', () => {
         
         expect(error).rejects.toThrow(Errors.ForbbidenError);
     });
-});*/
+});
 
-/*describe('function getRookMoves', () => {
+describe('function getRookMoves', () => {
     it('should return possible rook moves in a clean board', () => {
-        const expected = [
-            {row: 2, col:3},
-            {row: 1, col:3},
-            {row: 0, col:3},
-            {row: 3, col:4},
-            {row: 3, col:5},
-            {row: 3, col:6},
-            {row: 3, col:7},
-            {row: 4, col:3},
-            {row: 5, col:3},
-            {row: 6, col:3},
-            {row: 7, col:3},
-            {row: 3, col:2},
-            {row: 3, col:1},
-            {row: 3, col:0},
-        ]
+        const board = [];
+        const piece = {row: 3, col: 3, type: 'rook', color: 'white'};
+        const expected = Moves.rookCleanTable;
 
-        const result = PiecesControllers.getRookMoves({row: 3, col: 3}, {});
+        const result = PiecesControllers.getAllMoves(piece, board);
 
         expect(result).toEqual(expected);
     });
-});*/
 
-/*describe('function getBishopMoves', () => {
+    it('should return possible rook moves in all restriction ally piece', () => {
+        const piece = {row: 3, col: 3, type: 'rook', color: 'white'};
+        const board = Boards.rookAllyPieces;
+        const expected = Moves.rookAllyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible rook moves in all restriction enemy piece', () => {
+        const piece = {row: 3, col: 3, type: 'rook', color: 'white'};
+        const board = Boards.rookEnemyPieces;
+        const expected = Moves.rookEnemyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+});
+
+describe('function getBishopMoves', () => {
     it('should return possible bishop moves in a clean board', () => {
-        const expected = [
-            {row: 2, col:4},
-            {row: 1, col:5},
-            {row: 0, col:6},
-            {row: 4, col:4},
-            {row: 5, col:5},
-            {row: 6, col:6},
-            {row: 7, col:7},
-            {row: 4, col:2},
-            {row: 5, col:1},
-            {row: 6, col:0},
-            {row: 2, col:2},
-            {row: 1, col:1},
-            {row: 0, col:0},
-        ]
+        const board = [];
+        const piece = {row: 3, col: 3, type: 'bishop', color: 'white'};
+        const expected = Moves.bishopCleanTable;
 
-        const result = PiecesControllers.getBishopMoves({row: 3, col: 3}, {});
+        const result = PiecesControllers.getAllMoves(piece, board);
 
-        console.log(result, 'result');
         expect(result).toEqual(expected);
     });
-});*/
+
+    it('should return possible bishop moves in all restriction ally piece', () => {
+        const piece = {row: 3, col: 3, type: 'bishop', color: 'white'};
+        const board = Boards.bishopAllyPieces;
+        const expected = Moves.bishopAllyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible bishop moves in all restriction enemy piece', () => {
+        const piece = {row: 3, col: 3, type: 'bishop', color: 'white'};
+        const board = Boards.bishopEnemyPieces;
+        const expected = Moves.bishopEnemyPieces
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+});
 
 describe('function getQueenMoves', () => {
     it('should return possible queen moves in a clean board', () => {
-        const expected = [
-            {row: 2, col:3},
-            {row: 1, col:3},
-            {row: 0, col:3},
-            {row: 3, col:4},
-            {row: 3, col:5},
-            {row: 3, col:6},
-            {row: 3, col:7},
-            {row: 4, col:3},
-            {row: 5, col:3},
-            {row: 6, col:3},
-            {row: 7, col:3},
-            {row: 3, col:2},
-            {row: 3, col:1},
-            {row: 3, col:0},
-            {row: 2, col:4},
-            {row: 1, col:5},
-            {row: 0, col:6},
-            {row: 4, col:4},
-            {row: 5, col:5},
-            {row: 6, col:6},
-            {row: 7, col:7},
-            {row: 4, col:2},
-            {row: 5, col:1},
-            {row: 6, col:0},
-            {row: 2, col:2},
-            {row: 1, col:1},
-            {row: 0, col:0},
-        ]
+        const board = [];
+        const piece = {row: 3, col: 3, type: 'queen', color: 'white'};
+        const expected = Moves.queenCleanTable;
 
-        const result = PiecesControllers.getQueenMoves({row: 3, col: 3}, {});
+        const result = PiecesControllers.getAllMoves(piece, board);
 
-        console.log(result);
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible queen moves in all restriction ally piece', () => {
+        const piece = {row: 3, col: 3, type: 'queen', color: 'white'};
+        const board = Boards.queenAllyPieces;
+        const expected = Moves.queenAllyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible queen moves in all restriction enemy piece', () => {
+        const piece = {row: 3, col: 3, type: 'queen', color: 'white'};
+        const board = Boards.queenEnemyPieces;
+        const expected = Moves.queenEnemyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
         expect(result).toEqual(expected);
     });
 });
