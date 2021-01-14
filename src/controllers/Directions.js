@@ -119,9 +119,24 @@ class Directions {
         }
     }
 
+    knightSpots(row, col) {
+        const spots = [
+            {row: row - 2, col: col + 1},
+            {row: row - 1, col: col + 2},
+            {row: row + 1, col: col + 2},
+            {row: row + 2, col: col + 1},
+            {row: row + 2, col: col - 1},
+            {row: row + 1, col: col - 2},
+            {row: row - 1, col: col - 2},
+            {row: row -2, col: col - 1}
+        ];
+
+        return spots;
+    }
+
     verifyColor(board, color, row, col) {
-        const piece = board.find(t => t.row === row && t.col === col);
-        
+        const piece = board.find(spot => spot.row === row && spot.col === col);
+
         if(piece === undefined) {
             return undefined;
         } else if (piece.color === color) {

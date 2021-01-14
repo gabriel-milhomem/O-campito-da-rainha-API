@@ -1,6 +1,6 @@
 const Piece = require('../models/Piece');
 const Errors = require('../errors');
-const Directions = require('../utils/Directions');
+const Directions = require('./Directions');
 
 class PiecesControllers {
     async createPieces(matchId) {
@@ -36,27 +36,53 @@ class PiecesControllers {
                 moves = this.getQueenMoves(piece, board);
                 break
             case 'knight':
-                //moves = this.getKnightMoves(piece, board);
+                moves = this.getKnightMoves(piece, board);
                 break
             case 'king':
-                //moves = this.getKingMoves(piece, board);
+                moves = this.getKingMoves(piece, board);
                 break
             case 'pawn':
-                //moves = this.getPawnMoves(piece, board);
+                moves = this.getPawnMoves(piece, board);
                 break
         }
 
         return moves;
     }
 
+    getKnightMoves(piece, board) {
+        let moves;
+        const {row: currentRow, col: currentCol, color} = piece;
+
+        moves = Directions.knightSpots(currentRow, currentCol);
+
+        moves = moves.filter(move => ( 
+            move.col >= 0 && move.col <= 7 && move.row >= 0 && move.row <= 7
+        ));
+
+        moves = moves.filter(spot => ( 
+            !Directions.verifyColor(board, color, spot.col, spot.row)
+        ));
+
+        return moves;
+    }
+
+    getKingMoves(piece, board) {
+        let moves;
+
+    }
+
+    getPawnMoves(piece, board) {
+
+    }
+
     getBishopMoves(piece, board) {
         const moves = [];
-        const {row: actualRow, col: actualCol, color} = piece;
+        const {row: currentRow, col: currentCol, color} = piece;
 
-        Directions.northeast(actualRow - 1, actualCol + 1, moves, board, color);
-        Directions.southeast(actualRow + 1, actualCol + 1, moves, board, color);
-        Directions.southwest(actualRow + 1, actualCol - 1, moves, board, color);
-        Directions.northwest(actualRow - 1 , actualCol - 1, moves, board, color);
+        Directions.northeast(currentRow - 1, currentCol + 1, moves, board, color);
+        Directions.southeast(currentRow + 1, currentCol + 1, moves, board, color);
+        Directions.southwest(currentRow + 1, currentCol - 1, moves, board, color);
+        Directions.northwest(currentRow - 1 , currentCol - 1, moves, board, color);
 
         return moves;
     }
@@ -71,12 +97,12 @@ class PiecesControllers {
 
     getRookMoves(piece, board) {
         const moves = [];
-        const {row: actualRow, col: actualCol, color} = piece;
+        const {row: currentRow, col: currentCol, color} = piece;
 
-        Directions.north(actualRow - 1, actualCol, moves, board, color);
-        Directions.east(actualRow, actualCol + 1, moves, board, color);
-        Directions.south(actualRow + 1, actualCol, moves, board, color);
-        Directions.west(actualRow, actualCol - 1, moves, board, color);
+        Directions.north(currentRow - 1, currentCol, moves, board, color);
+        Directions.east(currentRow, currentCol + 1, moves, board, color);
+        Directions.south(currentRow + 1, currentCol, moves, board, color);
+        Directions.west(currentRow, currentCol - 1, moves, board, color);
 
         return moves;
     }

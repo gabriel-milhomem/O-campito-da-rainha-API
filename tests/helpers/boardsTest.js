@@ -30,7 +30,7 @@ const bishopAllyPieces = [
     {
         color: 'white',
         row: 1,
-        col: 6,
+        col: 5,
     },
     {
         color: 'white',
