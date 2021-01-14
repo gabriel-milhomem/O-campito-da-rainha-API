@@ -141,3 +141,87 @@ describe('function getQueenMoves', () => {
         expect(result).toEqual(expected);
     });
 });
+
+describe('function getKnightMoves', () => {
+    it('should return possible knight moves in the corner', () => {
+        const board = [];
+        const piece = {row: 0, col: 0, type: 'knight', color: 'white'};
+        const expected = Moves.knightCorner;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible knight moves in a \'clean table\' and jumps pieces', () => {
+        const piece = {row: 3, col: 3, type: 'knight', color: 'white'};
+        const board = Boards.knightCleanTable;
+        const expected = Moves.knightCleanTable;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible knight moves in all restriction ally piece', () => {
+        const piece = {row: 3, col: 3, type: 'knight', color: 'white'};
+        const board = Boards.knightAllyPieces;
+        const expected = [];
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible knight moves in all restriction enemy piece', () => {
+        const piece = {row: 3, col: 3, type: 'knight', color: 'white'};
+        const board = Boards.knightEnemyPieces;
+        const expected = Moves.knightEnemyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+});
+
+describe('function getKingMoves', () => {
+    it('should return possible king moves in the corner', () => {
+        const board = [];
+        const piece = {row: 0, col: 0, type: 'king', color: 'white'};
+        const expected = Moves.kingCorner;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible king moves in a clean table', () => {
+        const piece = {row: 3, col: 3, type: 'king', color: 'white'};
+        const board = [];
+        const expected = Moves.kingCleanTable;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible king moves in all restriction ally piece', () => {
+        const piece = {row: 3, col: 3, type: 'king', color: 'white'};
+        const board = Boards.kingAllyPieces;
+        const expected = [];
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible king moves in all restriction enemy piece', () => {
+        const piece = {row: 3, col: 3, type: 'king', color: 'white'};
+        const board = Boards.kingEnemyPieces;
+        const expected = Moves.kingEnemyPieces;
+
+        const result = PiecesControllers.getAllMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+});
