@@ -13,7 +13,7 @@ class Directions {
             return;
         } else {
             moves.push({row, col});
-            this.south(row - 1, col + 1, moves, table);
+            this.northeast(row - 1, col + 1, moves, table);
         }
     }
 
@@ -31,7 +31,7 @@ class Directions {
             return;
         } else {
             moves.push({row, col});
-            this.south(row + 1, col + 1, moves, table);
+            this.southeast(row + 1, col + 1, moves, table);
         }
     }
 
@@ -49,7 +49,7 @@ class Directions {
             return;
         } else {
             moves.push({row, col});
-            this.south(row + 1, col - 1, moves, table);
+            this.southwest(row + 1, col - 1, moves, table);
         }
     }
 
@@ -67,7 +67,7 @@ class Directions {
             return;
         } else {
             moves.push({row, col});
-            this.south(row - 1, col - 1, moves, table);
+            this.northwest(row - 1, col - 1, moves, table);
         }
     }
 }

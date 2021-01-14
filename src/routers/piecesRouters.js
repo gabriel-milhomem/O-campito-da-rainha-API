@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/:id/moves', authenticateMatch, authenticatePieces, (req, res) => {
     try {
-        const allMoves = PiecesControllers.getAllMoves(req.piece, req.match);
+        const allMoves = PiecesControllers.getAllMoves(req.piece, req.match.pieces);
         res.status(200).send(allMoves);
     } catch (err) {
         console.error(err);
