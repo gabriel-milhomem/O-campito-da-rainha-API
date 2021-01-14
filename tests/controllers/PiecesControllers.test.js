@@ -142,7 +142,7 @@ describe('function getQueenMoves', () => {
     });
 });*/
 
-describe('function getKnightMoves', () => {
+/*describe('function getKnightMoves', () => {
     it('should return possible knight moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
@@ -182,9 +182,9 @@ describe('function getKnightMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});
+});*/
 
-/*describe('function getKingMoves', () => {
+describe('function getKingMoves', () => {
     it('should return possible king moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
@@ -226,7 +226,7 @@ describe('function getKnightMoves', () => {
     });
 });
 
-describe('function getPawnMoves', () => {
+/*describe('function getPawnMoves', () => {
     it('should return possible pawn with moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];

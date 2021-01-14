@@ -119,7 +119,7 @@ class Directions {
         }
     }
 
-    knightSpots(row, col) {
+    allKnightSpots(row, col) {
         const spots = [
             {row: row - 2, col: col + 1},
             {row: row - 1, col: col + 2},
@@ -128,10 +128,29 @@ class Directions {
             {row: row + 2, col: col - 1},
             {row: row + 1, col: col - 2},
             {row: row - 1, col: col - 2},
-            {row: row -2, col: col - 1}
+            {row: row - 2, col: col - 1}
         ];
 
         return spots;
+    }
+
+    allKingSpots(row, col) {
+        const spots = [
+            {row: row - 1, col},
+            {row: row - 1, col: col + 1},
+            {row, col: col + + 1},
+            {row: row + 1, col: col + 1},
+            {row: row + 1, col},
+            {row: row + 1, col: col - 1},
+            {row, col: col - 1},
+            {row: row - 1, col: col - 1}
+        ];
+
+        return spots;
+    }
+
+    onTheBoard(row, col) {
+        return col >= 0 && col <= 7 && row >= 0 && row <= 7;
     }
 
     verifyColor(board, color, row, col) {

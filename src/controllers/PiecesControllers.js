@@ -53,10 +53,10 @@ class PiecesControllers {
         let moves;
         const {row: currentRow, col: currentCol, color} = piece;
 
-        moves = Directions.knightSpots(currentRow, currentCol);
+        moves = Directions.allKnightSpots(currentRow, currentCol);
 
         moves = moves.filter(move => ( 
-            move.col >= 0 && move.col <= 7 && move.row >= 0 && move.row <= 7
+            Directions.onTheBoard(move.row, move.col)
         ));
 
         moves = moves.filter(spot => ( 
@@ -68,7 +68,19 @@ class PiecesControllers {
 
     getKingMoves(piece, board) {
         let moves;
+        const {row: currentRow, col: currentCol, color} = piece;
 
+        moves = Directions.allKingSpots(currentRow, currentCol);
+
+        moves = moves.filter(move => ( 
+            Directions.onTheBoard(move.row, move.col)
+        ));
+
+        moves = moves.filter(spot => ( 
+            !Directions.verifyColor(board, color, spot.col, spot.row)
+        ));
+
+        return moves;
     }
 
     getPawnMoves(piece, board) {
