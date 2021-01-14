@@ -130,6 +130,50 @@ const knightAllyPieces = [
     }
 ];
 
+const pawnWhiteAllyPieces = [
+    {
+        color: 'white',
+        row: 2,
+        col: 3,
+    }
+];
+
+const pawnBlackAllyPieces = [
+    {
+        color: 'black',
+        row: 4,
+        col: 3,
+    }
+];
+
+const pawnWhiteEnemyPieces = [
+    {
+        color: 'black',
+        row: 2,
+        col: 2,
+    },
+    {
+        color: 'black',
+        row: 2,
+        col: 4,
+    }
+];
+
+const pawnBlackEnemyPieces = [
+    {
+        color: 'black',
+        row: 2,
+        col: 2,
+    },
+    {
+        color: 'black',
+        row: 2,
+        col: 4,
+    }
+];
+
+
+
 const rookEnemyPieces = rookAllyPieces.map(piece => ({...piece, color: 'black'}));
 const bishopEnemyPieces = bishopAllyPieces.map(piece => ({...piece, color: 'black'}));
 
@@ -143,11 +187,12 @@ const kingEnemyPieces = knightCleanTable.map(piece => ({...piece, color: 'black'
 
 module.exports = {
     rookAllyPieces,
-    bishopAllyPieces,
-    queenAllyPieces,
-
     rookEnemyPieces,
+
+    bishopAllyPieces,
     bishopEnemyPieces,
+
+    queenAllyPieces,
     queenEnemyPieces,
 
     knightCleanTable,
@@ -155,5 +200,11 @@ module.exports = {
     knightEnemyPieces,
 
     kingAllyPieces,
-    kingEnemyPieces
+    kingEnemyPieces,
+
+    pawnWhiteAllyPieces,
+    pawnWhiteEnemyPieces,
+
+    pawnBlackAllyPieces,
+    pawnBlackEnemyPieces
 }

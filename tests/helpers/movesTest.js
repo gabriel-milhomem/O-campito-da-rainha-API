@@ -70,7 +70,7 @@ const bishopEnemyPieces = [
 const knightCorner = [
     {row: 1, col: 2},
     {row: 2, col: 1}
-]
+];
 
 const knightCleanTable = [
     {row: 1, col: 4},
@@ -81,13 +81,13 @@ const knightCleanTable = [
     {row: 4, col: 1},
     {row: 2, col: 1},
     {row: 1, col: 2}
-]
+];
 
 const kingCorner = [
     {row: 0, col: 1},
     {row: 1, col: 1},
     {row: 1, col: 0},
-]
+];
 
 const kingCleanTable = [
     {row: 2, col: 3},
@@ -98,7 +98,25 @@ const kingCleanTable = [
     {row: 4, col: 2},
     {row: 3, col: 2},
     {row: 2, col: 2},
-]
+];
+
+const pawnWhiteCleanTable = [
+    {row: 2, col: 3}
+];
+
+const pawnBlackCleanTable = [
+    {row: 4, col: 3}
+];
+
+const pawnWhiteEnemyPieces = [
+    {row: 2, col: 2},
+    {row: 2, col: 4}
+];
+
+const pawnBlackEnemyPieces = [
+    {row: 4, col: 2},
+    {row: 4, col: 4}
+];
 
 const queenCleanTable = [...rookCleanTable, ...bishopCleanTable];
 const queenAllyPieces = [...rookAllyPieces, ...bishopAllyPieces];
@@ -110,15 +128,15 @@ const kingEnemyPieces = kingCleanTable;
 
 module.exports = {
     rookCleanTable,
-    bishopCleanTable,
-    queenCleanTable,
-
     rookAllyPieces,
-    bishopAllyPieces,
-    queenAllyPieces,
-
     rookEnemyPieces,
+
+    bishopCleanTable,
+    bishopAllyPieces,
     bishopEnemyPieces,
+
+    queenCleanTable,
+    queenAllyPieces,
     queenEnemyPieces,
 
     knightCorner,
@@ -127,5 +145,11 @@ module.exports = {
 
     kingCorner,
     kingCleanTable,
-    kingEnemyPieces
+    kingEnemyPieces,
+
+    pawnWhiteCleanTable,
+    pawnWhiteEnemyPieces,
+
+    pawnBlackCleanTable,
+    pawnBlackEnemyPieces
 }
