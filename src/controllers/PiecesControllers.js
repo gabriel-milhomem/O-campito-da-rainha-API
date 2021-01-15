@@ -39,11 +39,26 @@ class PiecesControllers {
         }
 
         match.status = (match.status === 'whitePlay') ? 'blackPlay': 'whitePlay';
+
+        await match.save();
+
+        await this.savePiece(piece, row, col);
+    }
+
+    async savePiece(piece, row, col) {
+        const { type, color } = piece;
+
+        if(type === 'pawn' && color === 'white' && row === 0) {
+            piece.type = 'queen';
+        }
+
+        if(type === 'pawn' && color === 'black' && row === 7) {
+            piece.type = 'queen';
+        }
+        
         piece.row = row;
         piece.col = col;
-
         await piece.save();
-        await match.save();
     }
 
     getAllMoves(piece, board) {
