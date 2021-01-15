@@ -107,13 +107,17 @@ class PiecesControllers {
     preventCheck(moves, board, kingColor) {
         let allEnemyAttack = [];
         board.forEach(piece => {
-            if(piece.color !== kingColor && piece.type !== 'king') {
-                const pieceAttack = this.getAllMoves(piece, board);
-                allEnemyAttack = allEnemyAttack.concat(pieceAttack);
-            } 
-            
-            if(piece.color !== kingColor && piece.type === 'king'){
-                allEnemyAttack = allEnemyAttack.concat(Directions.allKingSpots(piece.row, piece.col));
+            if(piece.color !== kingColor) {
+                if(piece.type === 'pawn') {
+                    const pawnAttacks = Directions.pawnAttackSpots(piece.row, piece.col, piece.color);
+                    allEnemyAttack = allEnemyAttack.concat(pawnAttacks);
+                } else if(piece.type === 'king'){
+                    const kingAttacks = Directions.allKingSpots(piece.row, piece.col);
+                    allEnemyAttack = allEnemyAttack.concat(kingAttacks);
+                } else {
+                    const pieceAttack = this.getAllMoves(piece, board);
+                    allEnemyAttack = allEnemyAttack.concat(pieceAttack);
+                }
             }
         });
 

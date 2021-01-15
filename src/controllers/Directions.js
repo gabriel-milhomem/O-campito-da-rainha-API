@@ -159,6 +159,21 @@ class Directions {
         return spots;
     }
 
+    pawnAttackSpots(row, col, color) {
+        const spots = (color === 'white') ?
+        [
+            {row: row - 1, col: col - 1},
+            {row: row - 1, col: col + 1}
+        ]
+            :
+        [
+            {row: row + 1, col: col - 1},
+            {row: row + 1, col: col + 1}
+        ]
+        
+        return spots;
+    }
+
     allKingSpots(row, col) {
         const spots = [
             {row: row - 1, col},

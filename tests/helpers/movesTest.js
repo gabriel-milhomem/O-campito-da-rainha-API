@@ -131,7 +131,8 @@ const pawnBlackInitialSpot = [
 ];
 
 const kingEnemyAttack = [
-    {row: 2, col: 2}
+    {row: 2, col: 3},
+    {row: 4, col: 3}
 ];
 
 const kingWithOtherKing = [
@@ -139,6 +140,20 @@ const kingWithOtherKing = [
     {row: 4, col: 3},
     {row: 4, col: 2},
     {row: 3, col: 2},
+    {row: 2, col: 2},
+];
+
+const kingWhitePawnAttack = [
+    {row: 2, col: 3},
+    {row: 4, col: 4},
+    {row: 4, col: 3},
+    {row: 4, col: 2},
+];
+
+const kingBlackPawnAttack = [
+    {row: 2, col: 3},
+    {row: 2, col: 4},
+    {row: 4, col: 3},
     {row: 2, col: 2},
 ];
 
@@ -181,5 +196,8 @@ module.exports = {
     pawnBlackInitialSpot,
 
     kingEnemyAttack,
-    kingWithOtherKing
+    kingWithOtherKing,
+
+    kingWhitePawnAttack,
+    kingBlackPawnAttack
 }

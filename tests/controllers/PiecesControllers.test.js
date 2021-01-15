@@ -249,9 +249,9 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });*/
 
-    it('should return possible king moves in all enemy attack (prevent king check)', () => {
+    /*it('should return possible white king moves in all enemy attack (prevent king check)', () => {
         const piece = {row: 3, col: 3, color: 'white'};
-        const board = Boards.kingBlackEnemyAttack;
+        const board = Boards.kingWhiteEnemyAttack;
         const expected = Moves.kingEnemyAttack;
 
         const result = PiecesControllers.getKingMoves(piece, board);
@@ -260,9 +260,9 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible king moves in all enemy attack (prevent king check)', () => {
+    it('should return possible black king moves in all enemy attack (prevent king check)', () => {
         const piece = {row: 3, col: 3, color: 'black'};
-        const board = Boards.kingWhiteEnemyAttack;
+        const board = Boards.kingBlackEnemyAttack;
         const expected = Moves.kingEnemyAttack;
 
         const result = PiecesControllers.getKingMoves(piece, board);
@@ -278,6 +278,27 @@ describe('function getKingMoves', () => {
         const result = PiecesControllers.getKingMoves(piece, board);
 
         console.log(expected, 'ESPERADO');
+        expect(result).toEqual(expected);
+    });*/
+
+    it('should return possible white king moves close to enemy pawns', () => {
+        const piece = {row: 3, col: 3, color: 'white'};
+        const board = Boards.kingWhitePawnAttack;
+        const expected = Moves.kingWhitePawnAttack;
+
+        const result = PiecesControllers.getKingMoves(piece, board);
+
+        console.log(expected, 'ESPERADO');
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible black king moves close to enemy pawns', () => {
+        const piece = {row: 3, col: 3, color: 'black'};
+        const board = Boards.kingBlackPawnAttack;
+        const expected = Moves.kingBlackPawnAttack;
+
+        const result = PiecesControllers.getKingMoves(piece, board);
+
         expect(result).toEqual(expected);
     });
 });
