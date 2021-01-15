@@ -134,6 +134,14 @@ const kingEnemyAttack = [
     {row: 2, col: 2}
 ];
 
+const kingWithOtherKing = [
+    {row: 2, col: 3},
+    {row: 4, col: 3},
+    {row: 4, col: 2},
+    {row: 3, col: 2},
+    {row: 2, col: 2},
+];
+
 const queenCleanTable = [...rookCleanTable, ...bishopCleanTable];
 const queenAllyPieces = [...rookAllyPieces, ...bishopAllyPieces];
 const queenEnemyPieces = [...rookEnemyPieces, ...bishopEnemyPieces];
@@ -172,5 +180,6 @@ module.exports = {
     pawnWhiteInitialSpot,
     pawnBlackInitialSpot,
 
-    kingEnemyAttack
+    kingEnemyAttack,
+    kingWithOtherKing
 }

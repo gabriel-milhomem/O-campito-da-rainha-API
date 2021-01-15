@@ -219,6 +219,15 @@ const kingBlackEnemyAttack = [
     }
 ];
 
+const kingWithOtherKing = [
+    {
+        color: 'black',
+        row: 3,
+        col: 5,
+        type: 'king'
+    },
+];
+
 const rookEnemyPieces = rookAllyPieces.map(piece => ({...piece, color: 'black'}));
 const bishopEnemyPieces = bishopAllyPieces.map(piece => ({...piece, color: 'black'}));
 
@@ -265,5 +274,7 @@ module.exports = {
     pawnWhiteCleanTable,
 
     kingWhiteEnemyAttack,
-    kingBlackEnemyAttack
+    kingBlackEnemyAttack,
+
+    kingWithOtherKing
 }

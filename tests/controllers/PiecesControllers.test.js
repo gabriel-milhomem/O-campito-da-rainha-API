@@ -9,7 +9,7 @@ const Schemas = require('../../src/schemas');
 jest.mock('../../src/schemas/moveSchema');
 jest.mock('../../src/models/Piece');
 
-describe('function createPieces', () => {
+/*describe('function createPieces', () => {
     it('should create all the pieces of chess when initial a game', async () => {
         const expected = allPieces;
 
@@ -206,10 +206,10 @@ describe('function getKnightMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});
+});*/
 
 describe('function getKingMoves', () => {
-    it('should return possible king moves in the corner', () => {
+    /*it('should return possible king moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
         const expected = Moves.kingCorner;
@@ -247,7 +247,7 @@ describe('function getKingMoves', () => {
         const result = PiecesControllers.getKingMoves(piece, board);
 
         expect(result).toEqual(expected);
-    });
+    });*/
 
     it('should return possible king moves in all enemy attack (prevent king check)', () => {
         const piece = {row: 3, col: 3, color: 'white'};
@@ -269,9 +269,20 @@ describe('function getKingMoves', () => {
 
         expect(result).toEqual(expected);
     });
+
+    it('should return possible king moves close to another king', () => {
+        const piece = {row: 3, col: 3, color: 'white'};
+        const board = Boards.kingWithOtherKing;
+        const expected = Moves.kingWithOtherKing;
+
+        const result = PiecesControllers.getKingMoves(piece, board);
+
+        console.log(expected, 'ESPERADO');
+        expect(result).toEqual(expected);
+    });
 });
 
-describe('function getPawnMoves', () => {
+/*describe('function getPawnMoves', () => {
     it('should return possible white pawn moves in the initial spot', () => {
         const piece = {row: 6, col: 0, color: 'white'};
         const board = [];
@@ -371,4 +382,4 @@ describe('function getPawnMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});
+});*/

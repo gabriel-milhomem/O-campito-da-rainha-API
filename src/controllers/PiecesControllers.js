@@ -105,12 +105,16 @@ class PiecesControllers {
     }
 
     preventCheck(moves, board, kingColor) {
-        const allEnemyAttack = [];
+        let allEnemyAttack = [];
         board.forEach(piece => {
             if(piece.color !== kingColor && piece.type !== 'king') {
                 const pieceAttack = this.getAllMoves(piece, board);
-                pieceAttack.forEach(attack => allEnemyAttack.push(attack));
+                allEnemyAttack = allEnemyAttack.concat(pieceAttack);
             } 
+            
+            if(piece.color !== kingColor && piece.type === 'king'){
+                allEnemyAttack = allEnemyAttack.concat(Directions.allKingSpots(piece.row, piece.col));
+            }
         });
 
         return moves.filter(move => (
