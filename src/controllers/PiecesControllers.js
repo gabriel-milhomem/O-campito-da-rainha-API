@@ -143,11 +143,7 @@ class PiecesControllers {
             Directions.onTheBoard(move.row, move.col)
         ));
 
-        console.log(moves, 'ANTES DO PREVENT');
-
         moves = this.preventCheck(moves, board, piece.color);
-
-        console.log(moves, 'DEPOIS DO PREVENT');
 
         moves = moves.filter(spot => ( 
             !Directions.verifyColor(board, color, spot.row, spot.col)
