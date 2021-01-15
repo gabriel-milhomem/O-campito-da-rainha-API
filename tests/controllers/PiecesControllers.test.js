@@ -70,7 +70,7 @@ describe('function validateMovesInput', () => {
     });
 });
 
-/*describe('function getRookMoves', () => {
+describe('function getRookMoves', () => {
     it('should return possible rook moves in a clean board', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = [];
@@ -164,9 +164,9 @@ describe('function getQueenMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});*/
+});
 
-/*describe('function getKnightMoves', () => {
+describe('function getKnightMoves', () => {
     it('should return possible knight moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
@@ -248,30 +248,30 @@ describe('function getKingMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});*/
+});
 
-/*describe('function getPawnMoves', () => {
-    it('should return possible pawn with moves in the corner', () => {
-        const piece = {row: 0, col: 0, color: 'white'};
+describe('function getPawnMoves', () => {
+    it('should return possible white pawn moves in the initial spot', () => {
+        const piece = {row: 6, col: 0, color: 'white'};
         const board = [];
-        const expected = [];
+        const expected = Moves.pawnWhiteInitialSpot;
 
         const result = PiecesControllers.getPawnMoves(piece, board);
 
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn black moves in the corner', () => {
-        const piece = {row: 7, col: 7, color: 'black'};
+    it('should return possible black pawn moves in the initial spot', () => {
+        const piece = {row: 1, col: 0, color: 'black'};
         const board = [];
-        const expected = [];
+        const expected = Moves.pawnBlackInitialSpot;
 
         const result = PiecesControllers.getPawnMoves(piece, board);
 
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn white moves in a clean table', () => {
+    it('should return possible white pawn moves in a clean table', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = Boards.pawnWhiteCleanTable;
         const expected = Moves.pawnWhiteCleanTable;
@@ -281,7 +281,7 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn black moves in a clean table', () => {
+    it('should return possible black pawn moves in a clean table', () => {
         const piece = {row: 3, col: 3, color: 'black'};
         const board = Boards.pawnBlackCleanTable;
         const expected = Moves.pawnBlackCleanTable;
@@ -291,29 +291,27 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn white moves in block spot enemy piece', () => {
+    it('should return possible white pawn moves in block spot enemy piece', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = Boards.pawnWhiteBlockedByEnemy;
         const expected = [];
 
-        console.log('BOARD', board);
         const result = PiecesControllers.getPawnMoves(piece, board);
 
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn black moves in block spot enemy piece', () => {
+    it('should return possible black pawn moves in block spot enemy piece', () => {
         const piece = {row: 3, col: 3, color: 'black'};
         const board = Boards.pawnBlackBlockedByEnemy;
         const expected = [];
 
-        console.log('BOARD', board);
         const result = PiecesControllers.getPawnMoves(piece, board);
 
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn white moves in all restriction ally piece', () => {
+    it('should return possible white pawn moves in all restriction ally piece', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = Boards.pawnWhiteAllyPieces;
         const expected = [];
@@ -323,7 +321,7 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn black moves in all restriction ally piece', () => {
+    it('should return possible black pawn moves in all restriction ally piece', () => {
         const piece = {row: 3, col: 3, color: 'black'};
         const board = Boards.pawnBlackAllyPieces;
         const expected = [];
@@ -333,7 +331,7 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn white moves in all restriction enemy piece', () => {
+    it('should return possible white pawn moves in all restriction enemy piece', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = Boards.pawnWhiteEnemyPieces;
         const expected = Moves.pawnWhiteEnemyPieces;
@@ -343,7 +341,7 @@ describe('function getKingMoves', () => {
         expect(result).toEqual(expected);
     });
 
-    it('should return possible pawn black moves in all restriction enemy piece', () => {
+    it('should return possible black pawn moves in all restriction enemy piece', () => {
         const piece = {row: 3, col: 3, color: 'black'};
         const board = Boards.pawnBlackEnemyPieces;
         const expected = Moves.pawnBlackEnemyPieces;
@@ -352,4 +350,4 @@ describe('function getKingMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});*/
+});

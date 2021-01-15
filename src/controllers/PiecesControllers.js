@@ -118,13 +118,9 @@ class PiecesControllers {
 
         moves = Directions.allPawnSpots(currentRow, currentCol, color);
 
-        moves = moves.filter(move => ( 
-            Directions.onTheBoard(move.row, move.col)
-        ));
-
         moves = moves.filter(spot => {
             const state = Directions.verifyColor(board, color, spot.row, spot.col);
-            
+
             const moveMiddle = (state === null && spot.pos === 'middle');
             const killEnemy = (state === false && (spot.pos === 'left' || spot.pos === 'right'));
             return moveMiddle || killEnemy;

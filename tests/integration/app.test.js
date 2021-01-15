@@ -163,4 +163,21 @@ describe('POST /pieces/:id/moves', () => {
             
         expect(response.status).toBe(422);
     });
+
+    it('should return 403, when movement is not allowed', async () => {
+        const body = {
+            row: 3,
+            col: 3
+        }
+    
+        const result = await agent.post('/matches');
+    
+        const response = await agent
+            .post(`/pieces/${result.body.pieces[pieces.length - 1].id}/moves`)
+            .send(body)
+            .set({'Player-Color': 'white', 'Secret-Key': result.body.secretKey
+        });
+            
+        expect(response.status).toBe(403);
+    });
 });

@@ -148,6 +148,14 @@ class Directions {
             {row: row + 1, col: col + 1, pos: 'right'}
         ]
 
+        if(color === 'white' && row === 6) {
+            spots.push({row: row - 2, col, pos: 'middle'});
+        }
+
+        if(color === 'black' && row === 1) {
+            spots.push({row: row + 2, col, pos: 'middle'});
+        }
+
         return spots;
     }
 
