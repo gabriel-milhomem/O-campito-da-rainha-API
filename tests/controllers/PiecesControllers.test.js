@@ -4,10 +4,12 @@ const allPieces = require('../helpers/piecesObject');
 const Moves = require('../helpers/movesTest');
 const Boards = require('../helpers/boardsTest');
 const Errors = require('../../src/errors');
+const Schemas = require('../../src/schemas');
 
+jest.mock('../../src/schemas/moveSchema');
 jest.mock('../../src/models/Piece');
 
-/*describe('function createPieces', () => {
+describe('function createPieces', () => {
     it('should create all the pieces of chess when initial a game', async () => {
         const expected = allPieces;
 
@@ -22,7 +24,7 @@ describe('function getPieceById', () => {
     it('should search a piece with correct id and returned the object', async () => {
         const expected = {id: 1, ...allPieces[0]};
 
-        Piece.findByPk.mockResolvedValue(expected);
+        Piece.findByPk.mockResolvedValueOnce(expected);
 
         const result = await PiecesControllers.getPieceById(1, 'black');
         
@@ -30,7 +32,7 @@ describe('function getPieceById', () => {
     });
 
     it('should throw an not found error ', () => {
-        Piece.findByPk.mockResolvedValue(null);
+        Piece.findByPk.mockResolvedValueOnce(null);
         
         const error = () => PiecesControllers.getPieceById(1, 'black');
         
@@ -38,7 +40,7 @@ describe('function getPieceById', () => {
     });
 
     it('should throw an forbidden error ', () => {
-        Piece.findByPk.mockResolvedValue({id: 1, ...allPieces[0]});
+        Piece.findByPk.mockResolvedValueOnce({id: 1, ...allPieces[0]});
         
         const error = () => PiecesControllers.getPieceById(1, 'white');
         
@@ -46,7 +48,29 @@ describe('function getPieceById', () => {
     });
 });
 
-describe('function getRookMoves', () => {
+describe('function validateMovesInput', () => {
+    it('should throw a invalid data error', () => {
+        Schemas.move.validate.mockReturnValueOnce({
+            error: true
+        });
+
+        const error = () => PiecesControllers.validateMovesInput('whitePlay', 'secret-key');
+
+        expect(error).toThrow(Errors.InvalidDataError);
+    });
+
+    it('should return undefined', () => {
+        Schemas.move.validate.mockReturnValueOnce({
+            error: false
+        });
+
+        const result = PiecesControllers.validateMovesInput('whitePlay', 'secret-key');
+
+        expect(result).toBeUndefined();
+    });
+});
+
+/*describe('function getRookMoves', () => {
     it('should return possible rook moves in a clean board', () => {
         const piece = {row: 3, col: 3, color: 'white'};
         const board = [];
@@ -226,7 +250,7 @@ describe('function getKingMoves', () => {
     });
 });*/
 
-describe('function getPawnMoves', () => {
+/*describe('function getPawnMoves', () => {
     it('should return possible pawn with moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
@@ -328,4 +352,4 @@ describe('function getPawnMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});
+});*/

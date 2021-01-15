@@ -16,7 +16,7 @@ async function authenticateMatch(req, res, next) {
         if(err instanceof Errors.UnauthorizedError) {
             return res.status(401).send({error: 'Secret-Key is not registered'});
         } else if(err instanceof Errors.InvalidDataError) {
-            return res.status(422).send({error: 'Body input is in incorrect format'});
+            return res.status(422).send({error: 'headers is in incorrect format'});
         } else {
             throw err;
         }

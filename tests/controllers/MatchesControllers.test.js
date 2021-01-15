@@ -1,7 +1,9 @@
 const MatchesControllers = require('../../src/controllers/MatchesControllers');
 const Match = require('../../src/models/Match');
+const Schemas = require('../../src/schemas');
 const Errors = require('../../src/errors');
 
+jest.mock('../../src/schemas/headersSchemas');
 jest.mock('../../src/models/Match');
 jest.mock('uuid', () => {
     return {
@@ -23,7 +25,7 @@ describe('function createMatch', () => {
 
 describe('function getMatchById', () => {
     it('should throw a not found error', () => {
-        Match.findByPk.mockResolvedValue(null);
+        Match.findByPk.mockResolvedValueOnce(null);
 
         const error = () => MatchesControllers.getMatchById(1);
 
@@ -31,7 +33,7 @@ describe('function getMatchById', () => {
     });
 
     it('should throw a forbbiden error ', () => {
-        Match.findByPk.mockResolvedValue({status: 'whitePlay'});
+        Match.findByPk.mockResolvedValueOnce({status: 'whitePlay'});
 
         const error = () => MatchesControllers.getMatchById(1, 'blue');
 
@@ -41,10 +43,32 @@ describe('function getMatchById', () => {
 
 describe('function getMatchBySecretKey', () => {
     it('should throw a unauthorized error ', () => {
-        Match.findOne.mockResolvedValue(null);
+        Match.findOne.mockResolvedValueOnce(null);
 
         const error = () => MatchesControllers.getMatchBySecretKey(1);
 
         expect(error).rejects.toThrow(Errors.UnauthorizedError);
+    });
+});
+
+describe('function validateHeaders', () => {
+    it('should throw a invalid data error', () => {
+        Schemas.headers.validate.mockReturnValueOnce({
+            error: true
+        });
+
+        const error = () => MatchesControllers.validateHeaders('whitePlay', 'secret-key');
+
+        expect(error).toThrow(Errors.InvalidDataError);
+    });
+
+    it('should return undefined', () => {
+        Schemas.headers.validate.mockReturnValueOnce({
+            error: false
+        });
+
+        const result = MatchesControllers.validateHeaders('whitePlay', 'secret-key');
+
+        expect(result).toBeUndefined();
     });
 });

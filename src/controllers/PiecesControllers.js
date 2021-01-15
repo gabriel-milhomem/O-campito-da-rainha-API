@@ -24,6 +24,28 @@ class PiecesControllers {
         return allPieces;
     }
 
+    async postMove(piece, match, request) {
+        const {row, col} = request;
+        const moves = this.getAllMoves(piece, match.pieces);
+        const isPossibleMove = moves.find(move => (
+            move.row === row && move.col === col)
+        );
+        
+        if(!isPossibleMove) throw new Errors.ForbbidenError();
+        
+        const notEnemy = Directions.verifyColor(match.pieces, piece.color, row, col);
+        if(notEnemy === false) {
+            await Piece.destroy({where: {matchId: piece.matchId, row, col}});
+        }
+
+        match.status = (match.status === 'whitePlay') ? 'blackPlay': 'whitePlay';
+        piece.row = row;
+        piece.col = col;
+
+        await piece.save();
+        await match.save();
+    }
+
     getAllMoves(piece, board) {
         let moves;
         switch(piece.type) {
@@ -100,17 +122,14 @@ class PiecesControllers {
             Directions.onTheBoard(move.row, move.col)
         ));
 
-        console.log(moves, 'MOVES');
-
         moves = moves.filter(spot => {
             const state = Directions.verifyColor(board, color, spot.row, spot.col);
-            console.log(state, 'STATE');
+            
             const moveMiddle = (state === null && spot.pos === 'middle');
             const killEnemy = (state === false && (spot.pos === 'left' || spot.pos === 'right'));
             return moveMiddle || killEnemy;
         });
 
-        console.log(moves, 'DEPOIS DO FILTRO');
         moves = moves.map(spot => ({row: spot.row, col: spot.col}));
 
         return moves;

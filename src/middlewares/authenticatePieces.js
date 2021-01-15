@@ -19,9 +19,9 @@ async function authenticatePieces(req, res, next) {
             return res.status(404).send({ error: 'pieces id parameter is not found'});
         } else if (err instanceof Errors.ForbbidenError) {
             return res.status(403).send({ error: 'playerColor not equal to status match or color piece'});
-        } 
-
-        res.sendStatus(500);
+        } else {
+            throw err;
+        }
     }
 }
 

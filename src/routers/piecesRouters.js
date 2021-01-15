@@ -2,8 +2,8 @@ const express = require('express');
 const authenticateMatch = require('../middlewares/authenticateMatch');
 const authenticatePieces = require('../middlewares/authenticatePieces');
 const Errors = require('../errors');
-const Schemas = require('../schemas');
 const PiecesControllers = require('../controllers/PiecesControllers');
+const MatchesControllers = require('../controllers/MatchesControllers');
 
 const router = express.Router();
 
@@ -22,14 +22,20 @@ router.post('/:id/moves', authenticateMatch, authenticatePieces, async (req, res
     try {
         const { row, col } = req.body;
         PiecesControllers.validateMovesInput(row, col);
-        
-        res.sendStatus(200);
+
+        await PiecesControllers.postMove(req.piece, req.match, req.body);
+
+        const allMatchData = await MatchesControllers.getMatchById(req.match.id);
+        res.status(201).send(allMatchData);
     } catch (err) {
-        if(err instanceof Errors.InvalidDataError) {
-            return res.status(422).send({error: 'Body input is in incorrect format'});
-        }
         console.error(err);
-        res.sendStatus(500);
+        if(err instanceof Errors.InvalidDataError) {
+            res.status(422).send({error: 'Body input is in incorrect format'});
+        } else if (err instanceof Errors.ForbbidenError) {
+            res.status(403).send({erro: 'this movement request is not allowed'});
+        } else {
+            res.sendStatus(500);
+        }
     }
 });
 
