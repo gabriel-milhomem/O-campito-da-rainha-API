@@ -104,6 +104,21 @@ class PiecesControllers {
         return moves;
     }
 
+    preventCheck(moves, board, kingColor) {
+        const allEnemyAttack = [];
+        board.forEach(piece => {
+            if(piece.color !== kingColor && piece.type !== 'king') {
+                const pieceAttack = this.getAllMoves(piece, board);
+                pieceAttack.forEach(attack => allEnemyAttack.push(attack));
+            } 
+        });
+
+        return moves.filter(move => (
+            !(allEnemyAttack.some(attack => ( 
+                attack.col === move.col && attack.row === move.row
+        )))));
+    }
+
     validateMovesInput(row, col) {
         const { error } = Schemas.move.validate({row, col});
 
@@ -119,6 +134,12 @@ class PiecesControllers {
         moves = moves.filter(move => ( 
             Directions.onTheBoard(move.row, move.col)
         ));
+
+        console.log(moves, 'ANTES DO PREVENT');
+
+        moves = this.preventCheck(moves, board, piece.color);
+
+        console.log(moves, 'DEPOIS DO PREVENT');
 
         moves = moves.filter(spot => ( 
             !Directions.verifyColor(board, color, spot.row, spot.col)
