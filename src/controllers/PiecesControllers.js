@@ -1,6 +1,7 @@
 const Piece = require('../models/Piece');
 const Errors = require('../errors');
 const Directions = require('./Directions');
+const Schemas = require('../schemas');
 
 class PiecesControllers {
     async createPieces(matchId) {
@@ -60,10 +61,16 @@ class PiecesControllers {
         ));
 
         moves = moves.filter(spot => ( 
-            !Directions.verifyColor(board, color, spot.col, spot.row)
+            !Directions.verifyColor(board, color, spot.row, spot.col)
         ));
 
         return moves;
+    }
+
+    validateMovesInput(row, col) {
+        const { error } = Schemas.move.validate({row, col});
+
+        if(error) throw new Errors.InvalidDataError();
     }
 
     getKingMoves(piece, board) {
@@ -77,14 +84,36 @@ class PiecesControllers {
         ));
 
         moves = moves.filter(spot => ( 
-            !Directions.verifyColor(board, color, spot.col, spot.row)
+            !Directions.verifyColor(board, color, spot.row, spot.col)
         ));
 
         return moves;
     }
 
     getPawnMoves(piece, board) {
+        let moves;
+        const {row: currentRow, col: currentCol, color} = piece;
 
+        moves = Directions.allPawnSpots(currentRow, currentCol, color);
+
+        moves = moves.filter(move => ( 
+            Directions.onTheBoard(move.row, move.col)
+        ));
+
+        console.log(moves, 'MOVES');
+
+        moves = moves.filter(spot => {
+            const state = Directions.verifyColor(board, color, spot.row, spot.col);
+            console.log(state, 'STATE');
+            const moveMiddle = (state === null && spot.pos === 'middle');
+            const killEnemy = (state === false && (spot.pos === 'left' || spot.pos === 'right'));
+            return moveMiddle || killEnemy;
+        });
+
+        console.log(moves, 'DEPOIS DO FILTRO');
+        moves = moves.map(spot => ({row: spot.row, col: spot.col}));
+
+        return moves;
     }
 
     getBishopMoves(piece, board) {

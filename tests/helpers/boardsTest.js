@@ -161,18 +161,42 @@ const pawnWhiteEnemyPieces = [
 
 const pawnBlackEnemyPieces = [
     {
-        color: 'black',
-        row: 2,
+        color: 'white',
+        row: 4,
         col: 2,
     },
     {
-        color: 'black',
-        row: 2,
+        color: 'white',
+        row: 4,
         col: 4,
     }
 ];
 
+const pawnBlackCleanTable = [
+    {
+        color: 'black',
+        row: 4,
+        col: 2,
+    },
+    {
+        color: 'black',
+        row: 4,
+        col: 4,
+    }
+];
 
+const pawnWhiteCleanTable = [
+    {
+        color: 'white',
+        row: 2,
+        col: 2,
+    },
+    {
+        color: 'white',
+        row: 2,
+        col: 4,
+    }
+];
 
 const rookEnemyPieces = rookAllyPieces.map(piece => ({...piece, color: 'black'}));
 const bishopEnemyPieces = bishopAllyPieces.map(piece => ({...piece, color: 'black'}));
@@ -184,6 +208,9 @@ const knightEnemyPieces = knightAllyPieces.map(piece => ({...piece, color: 'blac
 
 const kingAllyPieces = knightCleanTable.map(piece => ({...piece, color: 'white'}));
 const kingEnemyPieces = knightCleanTable.map(piece => ({...piece, color: 'black'}));
+
+const pawnWhiteBlockedByEnemy = pawnWhiteAllyPieces.map(piece => ({...piece, color: 'black'}));
+const pawnBlackBlockedByEnemy = pawnBlackAllyPieces.map(piece => ({...piece, color: 'white'}));
 
 module.exports = {
     rookAllyPieces,
@@ -203,8 +230,14 @@ module.exports = {
     kingEnemyPieces,
 
     pawnWhiteAllyPieces,
+    pawnBlackAllyPieces,
+
+    pawnBlackEnemyPieces,
     pawnWhiteEnemyPieces,
 
-    pawnBlackAllyPieces,
-    pawnBlackEnemyPieces
+    pawnWhiteBlockedByEnemy,
+    pawnBlackBlockedByEnemy,
+
+    pawnBlackCleanTable,
+    pawnWhiteCleanTable
 }

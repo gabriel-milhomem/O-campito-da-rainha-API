@@ -110,11 +110,13 @@ const pawnBlackCleanTable = [
 
 const pawnWhiteEnemyPieces = [
     {row: 2, col: 2},
+    {row: 2, col: 3},
     {row: 2, col: 4}
 ];
 
 const pawnBlackEnemyPieces = [
     {row: 4, col: 2},
+    {row: 4, col: 3},
     {row: 4, col: 4}
 ];
 

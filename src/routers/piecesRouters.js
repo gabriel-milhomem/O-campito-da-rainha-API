@@ -20,13 +20,14 @@ router.get('/:id/moves', authenticateMatch, authenticatePieces, (req, res) => {
 
 router.post('/:id/moves', authenticateMatch, authenticatePieces, async (req, res) => {
     try {
-        const { error } = Schemas.move.validate(req.body);
-        if(error) { 
-            return res.status(422).send({error: error.details[0].message});
-        }
+        const { row, col } = req.body;
+        PiecesControllers.validateMovesInput(row, col);
         
         res.sendStatus(200);
     } catch (err) {
+        if(err instanceof Errors.InvalidDataError) {
+            return res.status(422).send({error: 'Body input is in incorrect format'});
+        }
         console.error(err);
         res.sendStatus(500);
     }

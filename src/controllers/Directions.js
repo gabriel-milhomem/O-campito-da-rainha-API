@@ -5,7 +5,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if (stopEnemy !== undefined) {
+        } else if (stopEnemy !== null) {
             moves.push({row, col});
             return;
         } else {
@@ -20,7 +20,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -35,7 +35,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -50,7 +50,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -65,7 +65,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -80,7 +80,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -95,7 +95,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -110,7 +110,7 @@ class Directions {
 
         if(stopBorderOrAlly) {
             return;
-        } else if(stopEnemy !== undefined) {
+        } else if(stopEnemy !== null) {
             moves.push({row, col});
             return;
         }  else {
@@ -130,6 +130,23 @@ class Directions {
             {row: row - 1, col: col - 2},
             {row: row - 2, col: col - 1}
         ];
+
+        return spots;
+    }
+
+    allPawnSpots(row, col, color) {
+        const spots = (color === 'white') ?
+        [
+            {row: row - 1, col: col - 1, pos: 'left'},
+            {row: row - 1, col, pos: 'middle'},
+            {row: row - 1, col: col + 1, pos: 'right'}
+        ]
+            :
+        [
+            {row: row + 1, col: col - 1, pos: 'left'},
+            {row: row + 1, col, pos: 'middle'},
+            {row: row + 1, col: col + 1, pos: 'right'}
+        ]
 
         return spots;
     }
@@ -157,7 +174,7 @@ class Directions {
         const piece = board.find(spot => spot.row === row && spot.col === col);
 
         if(piece === undefined) {
-            return undefined;
+            return null;
         } else if (piece.color === color) {
             return true;
         } else {

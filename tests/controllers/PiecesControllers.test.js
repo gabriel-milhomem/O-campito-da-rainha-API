@@ -182,7 +182,7 @@ describe('function getQueenMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});*/
+});
 
 describe('function getKingMoves', () => {
     it('should return possible king moves in the corner', () => {
@@ -224,9 +224,9 @@ describe('function getKingMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});
+});*/
 
-/*describe('function getPawnMoves', () => {
+describe('function getPawnMoves', () => {
     it('should return possible pawn with moves in the corner', () => {
         const piece = {row: 0, col: 0, color: 'white'};
         const board = [];
@@ -249,7 +249,7 @@ describe('function getKingMoves', () => {
 
     it('should return possible pawn white moves in a clean table', () => {
         const piece = {row: 3, col: 3, color: 'white'};
-        const board = [];
+        const board = Boards.pawnWhiteCleanTable;
         const expected = Moves.pawnWhiteCleanTable;
 
         const result = PiecesControllers.getPawnMoves(piece, board);
@@ -259,9 +259,31 @@ describe('function getKingMoves', () => {
 
     it('should return possible pawn black moves in a clean table', () => {
         const piece = {row: 3, col: 3, color: 'black'};
-        const board = [];
+        const board = Boards.pawnBlackCleanTable;
         const expected = Moves.pawnBlackCleanTable;
 
+        const result = PiecesControllers.getPawnMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible pawn white moves in block spot enemy piece', () => {
+        const piece = {row: 3, col: 3, color: 'white'};
+        const board = Boards.pawnWhiteBlockedByEnemy;
+        const expected = [];
+
+        console.log('BOARD', board);
+        const result = PiecesControllers.getPawnMoves(piece, board);
+
+        expect(result).toEqual(expected);
+    });
+
+    it('should return possible pawn black moves in block spot enemy piece', () => {
+        const piece = {row: 3, col: 3, color: 'black'};
+        const board = Boards.pawnBlackBlockedByEnemy;
+        const expected = [];
+
+        console.log('BOARD', board);
         const result = PiecesControllers.getPawnMoves(piece, board);
 
         expect(result).toEqual(expected);
@@ -306,4 +328,4 @@ describe('function getKingMoves', () => {
 
         expect(result).toEqual(expected);
     });
-});*/
+});

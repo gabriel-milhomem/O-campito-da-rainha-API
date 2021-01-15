@@ -1,5 +1,4 @@
 const MatchesControllers = require('../controllers/MatchesControllers');
-const Schemas = require('../schemas');
 const Errors = require('../errors');
 
 async function authenticateMatch(req, res, next) {
@@ -7,10 +6,7 @@ async function authenticateMatch(req, res, next) {
         const playerColor = req.header('Player-Color');
         const secretKey = req.header('Secret-Key');
     
-        const { error } = Schemas.headers.validate({playerColor, secretKey});
-        if(error) { 
-            return res.status(422).send({error: error.details[0].message});
-        }
+        MatchesControllers.validateHeaders(playerColor, secretKey);
     
         await MatchesControllers.getMatchBySecretKey(secretKey);
 
@@ -19,9 +15,11 @@ async function authenticateMatch(req, res, next) {
         console.error(err);
         if(err instanceof Errors.UnauthorizedError) {
             return res.status(401).send({error: 'Secret-Key is not registered'});
+        } else if(err instanceof Errors.InvalidDataError) {
+            return res.status(422).send({error: 'Body input is in incorrect format'});
+        } else {
+            throw err;
         }
-
-        res.sendStatus(500);
     }
 }
 

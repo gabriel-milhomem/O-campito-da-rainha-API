@@ -2,6 +2,7 @@ const uuid = require('uuid');
 const Errors = require('../errors');
 const Match = require('../models/Match');
 const Piece = require('../models/Piece');
+const Schemas = require('../schemas');
 
 class MatchesControllers {
     async createMatch() {
@@ -33,6 +34,12 @@ class MatchesControllers {
         if(!match) throw new Errors.UnauthorizedError();
 
         return match;
+    }
+
+    validateHeaders(playerColor, secretKey) {
+        const { error } = Schemas.headers.validate({playerColor, secretKey});
+
+        if(error) throw new Errors.InvalidDataError();
     }
 }
 

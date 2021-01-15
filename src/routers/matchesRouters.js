@@ -29,9 +29,9 @@ router.get('/:id', authenticateMatch, async (req, res) => {
     } catch (err) {
         console.error(err);
         if(err instanceof Errors.NotFoundError) {
-            return res.status(404).send({ error: 'match id parameter is not found'});
+            return res.sendStatus(404);
         }
-        
+
         res.sendStatus(500);
     }
 });
