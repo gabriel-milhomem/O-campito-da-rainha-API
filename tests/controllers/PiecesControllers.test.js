@@ -256,7 +256,6 @@ describe('function getKingMoves', () => {
 
         const result = PiecesControllers.getKingMoves(piece, board);
 
-        console.log(result, 'RESULTADO');
         expect(result).toEqual(expected);
     });
 
@@ -277,7 +276,6 @@ describe('function getKingMoves', () => {
 
         const result = PiecesControllers.getKingMoves(piece, board);
 
-        console.log(expected, 'ESPERADO');
         expect(result).toEqual(expected);
     });
 
@@ -288,7 +286,6 @@ describe('function getKingMoves', () => {
 
         const result = PiecesControllers.getKingMoves(piece, board);
 
-        console.log(expected, 'ESPERADO');
         expect(result).toEqual(expected);
     });
 

@@ -15,6 +15,7 @@ async function authenticatePieces(req, res, next) {
 
         next();
     } catch (err) {
+        console.error(err);
         if(err instanceof Errors.NotFoundError) {
             return res.status(404).send({ error: 'pieces id parameter is not found'});
         } else if (err instanceof Errors.ForbbidenError) {
