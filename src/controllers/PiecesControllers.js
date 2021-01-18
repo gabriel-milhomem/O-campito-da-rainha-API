@@ -6,7 +6,7 @@ const Schemas = require('../schemas');
 class PiecesControllers {
     async createPieces(matchId) {
         const pieces = [];
-        const piecesInRow = ['rook', 'knight', 'bishop', 'king', 'queen', 'bishop', 'knight', 'rook'];
+        const piecesInRow = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
         const rows = [0, 1, 6, 7];
 
         rows.forEach((row, i) => {
